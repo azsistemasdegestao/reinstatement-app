@@ -1,0 +1,146 @@
+<div class="min-h-screen flex items-center justify-center p-4">
+  <div class="w-full max-w-6xl">
+    <div class="bg-blue-900 text-white rounded-md shadow p-4 mb-4">
+      <h1 class="text-xl font-semibold">Reinstatement Guide</h1>
+      <p class="text-sm opacity-90">Enter the values and click Submit.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <!-- LEFT -->
+      <section class="bg-white rounded-xl shadow border border-gray-200 overflow-hidden">
+        <header class="bg-blue-900 text-white px-5 py-3">
+          <h2 class="text-lg font-semibold">Reinstatement Guide</h2>
+        </header>
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="p-5 space-y-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+            <div class="space-y-1">
+              <label for="pastDueToday" class="block text-sm font-medium text-gray-700">Past Due Today</label>
+              <div class="currency-input">
+                <span class="prefix">$</span>
+                <input id="pastDueToday" type="number" step="0.01" formControlName="pastDueToday" />
+              </div>
+            </div>
+
+            <div class="space-y-1">
+              <label for="repossessionFees" class="block text-sm font-medium text-gray-700">Repossession Fees</label>
+              <div class="currency-input">
+                <span class="prefix">$</span>
+                <input id="repossessionFees" type="number" step="0.01" formControlName="repossessionFees" />
+              </div>
+            </div>
+
+            <div class="space-y-1">
+              <label for="nsfFees" class="block text-sm font-medium text-gray-700">NSF Fees</label>
+              <div class="currency-input">
+                <span class="prefix">$</span>
+                <input id="nsfFees" type="number" step="0.01" formControlName="nsfFees" />
+              </div>
+            </div>
+
+            <div class="space-y-1">
+              <label for="lateFees" class="block text-sm font-medium text-gray-700">Late Fees</label>
+              <div class="currency-input">
+                <span class="prefix">$</span>
+                <input id="lateFees" type="number" step="0.01" formControlName="lateFees" />
+              </div>
+            </div>
+
+            <div class="space-y-1">
+              <label for="keyFees" class="block text-sm font-medium text-gray-700">Key Fees</label>
+              <div class="currency-input">
+                <span class="prefix">$</span>
+                <input id="keyFees" type="number" step="0.01" formControlName="keyFees" />
+              </div>
+            </div>
+
+            <div class="space-y-1">
+              <label for="salesTaxes" class="block text-sm font-medium text-gray-700">Sales Taxes</label>
+              <div class="currency-input">
+                <span class="prefix">$</span>
+                <input id="salesTaxes" type="number" step="0.01" formControlName="salesTaxes" />
+              </div>
+            </div>
+
+            <div class="space-y-1">
+              <label for="additionalFees" class="block text-sm font-medium text-gray-700">Additional Fees</label>
+              <div class="currency-input">
+                <span class="prefix">$</span>
+                <input id="additionalFees" type="number" step="0.01" formControlName="additionalFees" />
+              </div>
+            </div>
+
+            <div class="flex items-center gap-3 mt-6">
+              <label for="includeAdditionalFees" class="text-sm font-medium text-gray-700">
+                Include Additional Fees
+              </label>
+              <label class="relative inline-flex items-center cursor-pointer">
+                <input id="includeAdditionalFees" type="checkbox" formControlName="includeAdditionalFees" class="sr-only peer">
+                <div class="w-11 h-6 bg-gray-300 rounded-full peer peer-checked:bg-blue-600 transition"></div>
+                <div class="dot peer-checked:translate-x-5"></div>
+              </label>
+            </div>
+          </div>
+
+          <button type="submit"
+                  class="w-full md:w-auto rounded-md bg-blue-900 px-4 py-2 text-white font-medium shadow hover:opacity-90">
+            Submit
+          </button>
+
+          <div *ngIf="submitted()" class="rounded-md bg-green-100 p-3 text-green-800 border border-green-200">
+            Success! Form submitted.
+          </div>
+        </form>
+      </section>
+
+      <!-- RIGHT -->
+      <aside class="bg-white rounded-xl shadow border border-gray-200 overflow-hidden h-fit">
+        <div class="flex items-center justify-between bg-blue-900 text-white px-5 py-3">
+          <h2 class="text-lg font-semibold">Account Information</h2>
+          <button (click)="onSubmit()"
+                  class="rounded-md bg-white/10 hover:bg-white/20 text-white px-4 py-1.5 font-medium shadow">
+            Submit
+          </button>
+        </div>
+
+        <div class="p-5 space-y-4">
+          <div class="inline-flex rounded-md border border-gray-300 overflow-hidden">
+            <span class="px-3 py-1.5 text-sm bg-white text-gray-800 font-medium">Loan</span>
+            <span class="px-3 py-1.5 text-sm bg-gray-100 text-gray-500">Customer</span>
+          </div>
+
+          <div class="grid grid-cols-3 gap-4 items-end">
+            <div class="text-center">
+              <div class="text-2xl font-semibold">$2,618.23</div>
+              <div class="text-xs text-gray-500 mt-0.5">Total Due</div>
+            </div>
+            <div class="text-center">
+              <div class="text-2xl font-semibold">$2,425.10</div>
+              <div class="text-xs text-gray-500 mt-0.5">Past Due</div>
+            </div>
+            <div class="text-center">
+              <div class="text-2xl font-semibold">$193.13</div>
+              <div class="text-xs text-gray-500 mt-0.5">Total Fees</div>
+            </div>
+          </div>
+
+          <div class="space-y-1 pt-2">
+            <div class="flex justify-between text-gray-700">
+              <span>Payment Amount:</span>
+              <span class="font-medium">$504.44</span>
+            </div>
+            <div class="flex justify-between text-gray-700">
+              <span>Frequency:</span>
+              <span class="font-medium">Monthly</span>
+            </div>
+          </div>
+
+          <div *ngIf="submitted()" class="rounded-md bg-green-100 p-3 text-green-800 border border-green-200">
+            Success! Form submitted.
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
